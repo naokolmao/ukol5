@@ -53,3 +53,32 @@ dkms.conf
 
 # debug information files
 *.dwo
+#include <stdio.h>
+
+int main() {
+    FILE *in, *out;
+    char buffer[256];
+
+    in = fopen("sobanova_read.txt", "r");
+    out = fopen("sobanova_write.txt", "w");
+
+    if (in == NULL || out == NULL) {
+        printf("Chyba pri otevreni souboru\n");
+        return 1;
+    }
+
+    fprintf(out, "Magdalena Šobanová\n");
+
+    while (fgets(buffer, 256, in) != NULL) {
+        fprintf(out, "%s", buffer);
+    }
+
+    // N1 + N2 = 3 + 5 = 8
+    fprintf(out, "\nKonstanta: %d\n", 8);
+
+    fclose(in);
+    fclose(out);
+
+    return 0;
+}
+
